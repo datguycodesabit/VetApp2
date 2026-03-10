@@ -1,0 +1,1 @@
+To start the app open cmdprompt and go to the vetapp2 directory, active the (venv) mode and then use 'python app.py' to start the program

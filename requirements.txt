@@ -1,0 +1,4 @@
+Flask==2.2.5
+easyocr==1.7.1
+torch==2.4.1
+Pillow==10.3.0
