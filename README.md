@@ -1,10 +1,10 @@
 Update the Raspberry Pi and install required packages: 
-  sudo apt update
+  sudo apt update,
   sudo apt install python3 python3-venv python3-pip git -y
 
 
 Clone the repository: 
-  git clone VetApp2
+  git clone VetApp2,
   cd VetApp2
 
 
