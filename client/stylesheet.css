@@ -19,6 +19,8 @@ video {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
+/* disable copy button and ocr text output
+
 #copyBtn {
   transition: color 0.2s ease;
 }
@@ -37,3 +39,5 @@ video {
   font-size: 0.875rem;
   color: #374151;
 }
+
+*/
