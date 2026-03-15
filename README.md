@@ -28,3 +28,6 @@ Find the Raspberry Pi IP address:
 
 
 gunicorn -w 4 -b 0.0.0.0:8000 app:app
+
+
+cloudflared tunnel --url http://localhost:8000
