@@ -1,31 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"> 
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>OCR Upload</title>
+  <meta name="viewport" content="width=device-width, initial-scale=0.8" />
+  <title>Resurrection Cemetery Index App</title>
 
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css"/>
 </head>
 
-<body class="bg-gradient-to-br from-blue-50 to-indigo-50 flex flex-col items-center justify-center min-h-screen p-4 font-sans">
+<body class="bg-gradient-to-br from-blue-50 to-indigo-50 flex items-center justify-center h-[100dvh] p-3 font-sans">
 
-  <div class="bg-white rounded-2xl shadow-lg w-full max-w-md p-6 text-center">
-    <h2 class="text-2xl font-semibold mb-4 text-blue-800">OCR Upload</h2>
+<div class="bg-white rounded-2xl shadow-lg w-full max-w-md h-[95dvh] flex flex-col overflow-hidden">
 
-    <div class="relative w-full mb-4">
-      <video id="video" autoplay playsinline class="rounded-xl shadow-md w-full"></video>
-      <canvas id="canvas" class="hidden"></canvas>
+  <div class="p-4 text-center">
+    <h2 class="text-xl font-semibold text-blue-800">dalioprojects.com</h2>
+  </div>
+
+  <!-- video player -->
+  <div class="relative flex-grow bg-black">
+
+    <video
+      id="video" autoplay playsinline class="absolute inset-0 w-full h-full object-cover">
+    </video>
+    <canvas id="canvas" class="hidden"></canvas>
+
+    <!-- capture button -->
+    <div class="absolute bottom-4 left-0 right-0 flex flex-col items-center gap-2 px-4">
+      <button id="capture" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 rounded-xl shadow-lg transition">Capture</button>
+
+    <div id="statusText" class="text-sm text-white text-center break-words min-h-[20px]"></div>
     </div>
 
-    <button id="capture" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 rounded-lg transition mb-2">Capture</button>
+  </div>
 
-    <div id="statusText" class="mt-2 text-sm text-blue-600 break-words"></div>
+</div>
 
-<!-- Quarantine copy box and ocr text output
-
+<!-- quarintine copy box
     <div id="resultBox" class="hidden mt-4 border rounded-lg bg-gray-50 p-3 text-left shadow-sm">
       <div class="flex justify-between items-center mb-2">
         <h3 class="font-semibold text-gray-700">Recognized Text</h3>
@@ -35,8 +48,7 @@
     </div>
 -->
 
-  </div>
-
   <script src="script.js"></script>
+
 </body>
 </html>
