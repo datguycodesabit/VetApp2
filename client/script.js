@@ -3,12 +3,11 @@ const canvas = document.getElementById('canvas');
 const statusText = document.getElementById('statusText');
 const captureBtn = document.getElementById('capture');
 
-//camera function
 async function startCamera() {
   try {
     const constraints = {
       video: {
-        facingMode: { ideal: "environment" }, // back camera
+        facingMode: { ideal: "environment" },
         width: { ideal: 1280 },
         height: { ideal: 720 }
       },
@@ -28,6 +27,7 @@ async function startCamera() {
   }
 }
 
+// transcode image to OCR readable jpeg
 function canvasToBlob(canvas, type = 'image/jpeg', quality = 0.95) {
   return new Promise((resolve, reject) => {
     if (canvas.width === 0 || canvas.height === 0) {
@@ -92,6 +92,8 @@ window.fetch = async (...args) => {
     const cloned = res.clone();
     cloned.json()
       .then(data => {
+
+/* remove server fetch
         fetch(`/uploads/text/${data.text}`)
           .then(r => r.text())
           .then(text => {
@@ -99,12 +101,17 @@ window.fetch = async (...args) => {
             resultBox.classList.remove('hidden');
             setStatus("OCR completed", "success");
           });
+*/
+
+        
+        setStatus("Image successfully uploaded!", "success");
       })
       .catch(console.error);
   }
   return res;
 };
 
+/* remove copy button logic
 copyBtn.addEventListener('click', async () => {
   try {
     await navigator.clipboard.writeText(ocrText.textContent);
@@ -114,6 +121,6 @@ copyBtn.addEventListener('click', async () => {
     alert("Failed to copy text.");
   }
 });
+*/
 
-//run camera
 startCamera();
