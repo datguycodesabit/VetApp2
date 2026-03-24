@@ -1,6 +1,4 @@
-Create a Python3.11.11 venv:
-  python3.11.11 -m venv [your-venv-name]
-  source [your-venv-name]/bin/activate
+Running on a Python3.11.11 virtual enviorment
 
 Install requirements:
   pip install -r requirements.txt
