@@ -37,7 +37,7 @@ def upload():
     if not snippet:
         snippet = 'capture'
 
-# rename image file
+    # rename image file
     final_image_filename = f"{timestamp}_{snippet}.jpg"
     final_image_path = os.path.join(IMAGE_FOLDER, final_image_filename)
     os.rename(temp_path, final_image_path)
@@ -53,7 +53,6 @@ def upload():
         'text': text_filename
     })
 
-# send
 @app.route('/uploads/images/<filename>')
 def uploaded_image(filename):
     return send_from_directory(IMAGE_FOLDER, filename)
