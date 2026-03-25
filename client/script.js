@@ -20,23 +20,23 @@ async function startCamera() {
     video.setAttribute('playsinline', true);
     await video.play();
 
-    statusText.textContent = "Camera ready (back camera).";
+    statusText.textContent = "Camera ready.";
   } catch (err) {
     console.error('Camera error:', err);
-    statusText.textContent = "Unable to access camera. Check permissions and HTTPS.";
+    statusText.textContent = "Unable to access camera. Check permissions.";
   }
 }
 
-// transcode image to OCR readable jpeg
+// transcode image to jpeg
 function canvasToBlob(canvas, type = 'image/jpeg', quality = 0.95) {
   return new Promise((resolve, reject) => {
     if (canvas.width === 0 || canvas.height === 0) {
-      reject(new Error("Canvas has zero width or height"));
+      reject(new Error("No reported video source."));
       return;
     }
     canvas.toBlob(blob => {
       if (blob) resolve(blob);
-      else reject(new Error("Failed to create Blob from canvas"));
+      else reject(new Error("blob failed"));
     }, type, quality);
   });
 }
@@ -61,7 +61,7 @@ captureBtn.addEventListener('click', async () => {
     if (!response.ok) throw new Error(`HTTP error ${response.status}`);
 
     const result = await response.json();
-    statusText.textContent = `Uploaded: ${result.image}\n🪶 Text: ${result.text}`;
+    statusText.textContent = `Uploaded: ${result.image}\n Text: ${result.text}`;
     console.log(result);
 
   } catch (err) {
