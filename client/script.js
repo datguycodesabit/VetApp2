@@ -11,7 +11,7 @@ async function Camera() {
         width: { ideal: 1280 },
         height: { ideal: 720 }
       },
-      audio: false
+        audio: false
     };
 
     const stream = await navigator.mediaDevices.getUserMedia(constraints);
