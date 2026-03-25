@@ -3,7 +3,7 @@ const canvas = document.getElementById('canvas');
 const statusText = document.getElementById('statusText');
 const captureBtn = document.getElementById('capture');
 
-async function startCamera() {
+async function Camera() {
   try {
     const constraints = {
       video: {
@@ -23,15 +23,15 @@ async function startCamera() {
     statusText.textContent = "Camera ready.";
   } catch (err) {
     console.error('Camera error:', err);
-    statusText.textContent = "Unable to access camera. Check permissions.";
+    statusText.textContent = "Unable to access camera. Check browser permissions.";
   }
 }
 
 // transcode image to jpeg
-function canvasToBlob(canvas, type = 'image/jpeg', quality = 0.95) {
+function toBlob(canvas, type = 'image/jpeg', quality = 0.96) {
   return new Promise((resolve, reject) => {
     if (canvas.width === 0 || canvas.height === 0) {
-      reject(new Error("No reported video source."));
+      reject(new Error("No video source found."));
       return;
     }
     canvas.toBlob(blob => {
@@ -51,18 +51,20 @@ captureBtn.addEventListener('click', async () => {
     canvas.height = video.videoHeight;
     ctx.drawImage(video, 0, 0);
 
-    const blob = await canvasToBlob(canvas);
+    const blob = await toBlob(canvas);
     const formData = new FormData();
     formData.append('image', blob, 'capture.jpg');
 
     statusText.textContent = "Uploading...";
 
-    const response = await fetch('/upload', { method: 'POST', body: formData });
-    if (!response.ok) throw new Error(`HTTP error ${response.status}`);
+    const response = await fetch('/upload', {  method: 'POST',  body: formData}); 
+    if (!response.ok) {throw new Error(`Upload failed (${response.status})`);
+  }
 
-    const result = await response.json();
-    statusText.textContent = `Uploaded: ${result.image}\n Text: ${result.text}`;
-    console.log(result);
+  const result = await response.json();
+
+  setStatus("Image successfully uploaded!", "success");
+  console.log("Upload result:", result);
 
   } catch (err) {
     console.error(err);
@@ -72,11 +74,6 @@ captureBtn.addEventListener('click', async () => {
   }
 });
 
-//copy button function
-const resultBox = document.getElementById('resultBox');
-const ocrText = document.getElementById('ocrText');
-const copyBtn = document.getElementById('copyBtn');
-
 function setStatus(message, type = "info") {
   statusText.textContent = message;
   statusText.classList.remove("text-blue-600", "text-green-600", "text-red-600");
@@ -85,42 +82,4 @@ function setStatus(message, type = "info") {
   else statusText.classList.add("text-blue-600");
 }
 
-const origFetch = window.fetch;
-window.fetch = async (...args) => {
-  const res = await origFetch(...args);
-  if (res.ok && args[0] === '/upload') {
-    const cloned = res.clone();
-    cloned.json()
-      .then(data => {
-
-/* remove server fetch
-        fetch(`/uploads/text/${data.text}`)
-          .then(r => r.text())
-          .then(text => {
-            ocrText.textContent = text;
-            resultBox.classList.remove('hidden');
-            setStatus("OCR completed", "success");
-          });
-*/
-
-        
-        setStatus("Image successfully uploaded!", "success");
-      })
-      .catch(console.error);
-  }
-  return res;
-};
-
-/* remove copy button logic
-copyBtn.addEventListener('click', async () => {
-  try {
-    await navigator.clipboard.writeText(ocrText.textContent);
-    copyBtn.textContent = "Copied!";
-    setTimeout(() => (copyBtn.textContent = "Copy"), 1500);
-  } catch (err) {
-    alert("Failed to copy text.");
-  }
-});
-*/
-
-startCamera();
+Camera();
