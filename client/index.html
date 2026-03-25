@@ -7,35 +7,32 @@
   <title>Resurrection Cemetery Index App</title>
 
   <script src="https://cdn.tailwindcss.com"></script>
-
   <link rel="stylesheet" href="style.css"/>
 </head>
 
 <body class="bg-gradient-to-br from-blue-50 to-indigo-50 flex items-center justify-center h-[100dvh] p-3 font-sans">
 
 <div class="bg-white rounded-2xl shadow-lg w-full max-w-md h-[95dvh] flex flex-col overflow-hidden">
-
+  
   <div class="p-4 text-center">
-    <h2 class="text-xl font-semibold text-blue-800">dalioprojects.com</h2>
+    <h2 class="text-xl font-semibold text-blue-800">www.dalioprojects.com</h2>
   </div>
 
   <div class="relative flex-grow bg-black">
     
-    <video
-      id="video" autoplay playsinline class="absolute inset-0 w-full h-full object-cover">
-    </video>
+    <video id="video" autoplay playsinline class="absolute inset-0 w-full h-full object-cover"></video>
     <canvas id="canvas" class="hidden"></canvas>
 
-    <div class="absolute bottom-4 left-0 right-0 flex flex-col items-center gap-2 px-4">
+  <div class="absolute bottom-4 left-0 right-0 flex flex-col items-center gap-2 px-4">
     <button id="capture" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 rounded-xl shadow-lg transition">Capture</button>
     <div id="statusText" class="text-sm text-white text-center break-words min-h-[20px]"></div>
-    </div>
+  </div>
     
   </div>
-
+  
 </div>
 
   <script src="script.js"></script>
-
 </body>
+  
 </html>
