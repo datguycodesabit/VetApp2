@@ -26,12 +26,10 @@ def upload():
     image_file = request.files['image']
     timestamp = int(time.time() * 1000)
 
-    # Temporary filename
     temp_filename = f"{timestamp}_temp.jpg"
     temp_path = os.path.join(IMAGE_FOLDER, temp_filename)
     image_file.save(temp_path)
 
-    # Run OCR
     ocr_result = reader.readtext(temp_path, detail=0)
     text_output = ' '.join(ocr_result).strip() or 'NoText'
 
@@ -39,7 +37,7 @@ def upload():
     if not snippet:
         snippet = 'capture'
 
-    # Rename image file
+# rename image file
     final_image_filename = f"{timestamp}_{snippet}.jpg"
     final_image_path = os.path.join(IMAGE_FOLDER, final_image_filename)
     os.rename(temp_path, final_image_path)
@@ -55,7 +53,7 @@ def upload():
         'text': text_filename
     })
 
-# Serve uploaded files
+# send
 @app.route('/uploads/images/<filename>')
 def uploaded_image(filename):
     return send_from_directory(IMAGE_FOLDER, filename)
